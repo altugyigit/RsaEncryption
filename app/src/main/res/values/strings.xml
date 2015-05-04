@@ -3,4 +3,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="btnsifrele">Şifrele</string>
+    <string name="twP">P :</string>
+    <string name="twQ">Q :</string>
+    <string name="twMetin">Metin :</string>
 </resources>

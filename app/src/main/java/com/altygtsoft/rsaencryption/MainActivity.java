@@ -1,38 +1,91 @@
 package com.altygtsoft.rsaencryption;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    public EditText txtP;
+    public EditText txtQ;
+    public EditText txtMetin;
+    public int p = 0;
+    public int q = 0;
+    public String metin = "start";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        actionbarStyle();
+        startCast();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private void actionbarStyle()
+    {
+        ActionBar actionBar = getSupportActionBar();
+
+        if(actionBar != null)
+        {
+            actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(205, 200, 177)));
+            actionBar.setTitle((Html.fromHtml("<font color=\"#3b414a\">" + getString(R.string.app_name) + "</font>")));
+
+            actionBar.show();
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private boolean asalMi(int sayi)
+    {
+        boolean asal = true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        for(int i=0; i<=sayi/2; i++)
+        {
+            if(sayi%i == 0)
+            {
+                asal = false;
+                break;
+            }
         }
 
-        return super.onOptionsItemSelected(item);
+        return asal;
+    }
+
+    private void startCast()
+    {
+        //2147483647 max int
+        //9223372036854775807 max long
+
+        txtP = (EditText)findViewById(R.id.txtP);
+        txtQ = (EditText)findViewById(R.id.txtQ);
+        txtMetin = (EditText)findViewById(R.id.txtMetin);
+
+        try
+        {
+            p = Integer.parseInt(txtP.getText().toString());
+            q = Integer.parseInt(txtQ.getText().toString());
+            metin = txtMetin.getText().toString();
+        }
+        catch (Throwable e)
+        {
+            Log.d("THROW", "DEGERLER BOS OLABILIR !");
+        }
+        if(p != 0 && q != 0 && metin.equals("start"))
+        {
+
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),"Alanlar Boþ Býrakýlamaz !",Toast.LENGTH_LONG).show();
+        }
     }
 }
